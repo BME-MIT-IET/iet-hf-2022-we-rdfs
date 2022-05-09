@@ -6,10 +6,10 @@ dolgozhatnak az RDF modellekkel és egyéb szemantikus technikákkal.
 
 A projekt 4 fő package-et tartalmaz, a különböző Szemantikus Web rétegeknek megfeleltethetően: 
 
-**Model**:      RDF modellek létrehozása és managelése, SHACL shapes létrehozása és validálása
+**Model**:      RDF modellek létrehozása és menedzselése, SHACL shapes létrehozása és validálása
 
-**Store**:      RDF gyűjteméhnyek létrehozása és menedzselése.
+**Store**:      RDF gyűjtemények létrehozása és menedzselése.
 
 **Query**:      Létrehoz és végrehajt SPARSQL lekérdezéseket és módosításokat gráfokon vagy gyűjteményeken
 
-**Semantics**:  Létrehoz és menedzsel OWL ontológiákat és azok elemeit. Különféle szamantikai szabályok alapján lehet őket validálni, valamint SKOS sémák és SWRL reasoners-eket is itt lehet létrehozni.
+**Semantics**:  Létrehoz és menedzsel OWL ontológiákat és azok elemeit. Különféle szemantikai szabályok alapján lehet őket validálni, valamint SKOS sémák és SWRL reasoners-eket is itt lehet létrehozni.
