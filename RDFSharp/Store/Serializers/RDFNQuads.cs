@@ -261,6 +261,8 @@ namespace RDFSharp.Store
                         else
                         {
                             #region sanitize
+                            #pragma warning disable S4143 // It was checked, it's valid and okay
+                                         //They used it because strings are immutable and they changed some part of the same word in every operation
                             tokens[2] = RDFNTriples.regexSqt.Replace(tokens[2], string.Empty);
                             tokens[2] = RDFNTriples.regexEqt.Replace(tokens[2], string.Empty);
                             tokens[2] = tokens[2].Replace("\\\\", "\\")
@@ -269,6 +271,7 @@ namespace RDFSharp.Store
                                                  .Replace("\\t", "\t")
                                                  .Replace("\\r", "\r");
                             tokens[2] = RDFModelUtilities.ASCII_To_Unicode(tokens[2]);
+                            #pragma warning restore S4143
                             #endregion
 
                             #region plain literal

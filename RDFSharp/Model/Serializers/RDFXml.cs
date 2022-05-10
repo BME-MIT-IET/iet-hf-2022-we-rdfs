@@ -188,7 +188,7 @@ namespace RDFSharp.Model
                         foreach (RDFTriple triple in triplesGroup)
                         {
                             //Do not append the triple if it is "SUBJECT rdf:type rdf:[Bag|Seq|Alt]"
-                            if (!(triple.Predicate.Equals(RDFVocabulary.RDF.TYPE) &&
+                            if (!(triple.Predicate.Equals(RDFVocabulary.RDF.TYPE) && subjNode != null &&
                                   (subjNode.Name.Equals("rdf:Bag", StringComparison.OrdinalIgnoreCase)
                                     || subjNode.Name.Equals("rdf:Seq", StringComparison.OrdinalIgnoreCase)
                                        || subjNode.Name.Equals("rdf:Alt", StringComparison.OrdinalIgnoreCase))))
@@ -335,7 +335,7 @@ namespace RDFSharp.Model
 
                         //Raw containers must not be written as-is, instead they have to be saved
                         //and attached whenever their subject is found as object of a triple
-                        if (!subjNode.Name.Equals("rdf:Bag", StringComparison.OrdinalIgnoreCase)
+                        if (subjNode != null && !subjNode.Name.Equals("rdf:Bag", StringComparison.OrdinalIgnoreCase)
                                 && !subjNode.Name.Equals("rdf:Seq", StringComparison.OrdinalIgnoreCase)
                                     && !subjNode.Name.Equals("rdf:Alt", StringComparison.OrdinalIgnoreCase))
                         {
