@@ -175,7 +175,6 @@ namespace RDFSharp.Query
         {
             //Inject SPARQL values within every evaluable member
             askQuery.InjectValues(askQuery.GetValues());
-
             RDFAskQueryResult askResult = new RDFAskQueryResult();
             List<RDFQueryMember> evaluableQueryMembers = askQuery.GetEvaluableQueryMembers().ToList();
             if (evaluableQueryMembers.Any())
