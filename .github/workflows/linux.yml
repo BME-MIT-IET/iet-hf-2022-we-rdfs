@@ -2,10 +2,8 @@ name: linux
 
 on:
   push:
-    branches:      
-          - main
-          - unit_testing_and_code_coverage
-
+    branches: [main , unit_testing_and_code_coverage]
+        
 jobs:
   build:
     runs-on: ubuntu-latest
