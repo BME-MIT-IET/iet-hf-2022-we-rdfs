@@ -121,9 +121,16 @@ namespace RDFSharp.Model
                     foreach (RDFTriple t in graph)
                     {
                         #region template
-                        tripleTemplate = t.TripleFlavor == RDFModelEnums.RDFTripleFlavors.SPO ? TemplateSPO
-                                            : t.Object is RDFPlainLiteral ? TemplateSPLL
-                                                : TemplateSPLT;
+                        tripleTemplate = TemplateSPLT;
+
+                        if (t.TripleFlavor == RDFModelEnums.RDFTripleFlavors.SPO)
+                        {
+                            tripleTemplate = TemplateSPO;
+                        }
+                        else if (t.Object is RDFPlainLiteral)
+                        {
+                            tripleTemplate = TemplateSPLL;
+                        }
                         #endregion
 
                         #region subj
@@ -150,8 +157,8 @@ namespace RDFSharp.Model
                                                            .Replace("\r", "\\r");
 
                             #region plain literal
-                            if (t.Object is RDFPlainLiteral)
-                                tripleTemplate = ((RDFPlainLiteral)t.Object).HasLanguage() ? tripleTemplate.Replace("{LANG}", ((RDFPlainLiteral)t.Object).Language)
+                            if (t.Object is RDFPlainLiteral literal)
+                                tripleTemplate = literal.HasLanguage() ? tripleTemplate.Replace("{LANG}", literal.Language)
                                                     : tripleTemplate.Replace("@{LANG}", string.Empty);
                             #endregion
 
@@ -210,8 +217,8 @@ namespace RDFSharp.Model
 
                         #region sanitize  & tokenize
                         //Cleanup previous data
-                        S = null; tokens[0] = string.Empty;
-                        P = null; tokens[1] = string.Empty;
+                        tokens[0] = string.Empty;
+                        tokens[1] = string.Empty;
                         O = null; L = null; tokens[2] = string.Empty;
 
                         //Preliminary sanitizations: clean trailing space-like chars
@@ -256,6 +263,8 @@ namespace RDFSharp.Model
                         {
 
                             #region sanitize
+                            #pragma warning disable S4143 // It was checked, it's valid and okay
+                                        //They used it because strings are immutable and they changed some part of the same word in every operation
                             tokens[2] = regexSqt.Replace(tokens[2], string.Empty);
                             tokens[2] = regexEqt.Replace(tokens[2], string.Empty);
                             tokens[2] = tokens[2].Replace("\\\\", "\\")
@@ -264,6 +273,7 @@ namespace RDFSharp.Model
                                                  .Replace("\\t", "\t")
                                                  .Replace("\\r", "\r");
                             tokens[2] = RDFModelUtilities.ASCII_To_Unicode(tokens[2]);
+                            #pragma warning restore S4143 
                             #endregion
 
                             #region plain literal

@@ -43,7 +43,7 @@ namespace RDFSharp.Query
         /// <summary>
         /// Default column type used for Mirella tables
         /// </summary>
-        internal static Type SystemString = typeof(string); 
+        internal static readonly Type SystemString = typeof(string); 
         #endregion
 
         #region Ctors
@@ -175,7 +175,6 @@ namespace RDFSharp.Query
         {
             //Inject SPARQL values within every evaluable member
             askQuery.InjectValues(askQuery.GetValues());
-
             RDFAskQueryResult askResult = new RDFAskQueryResult();
             List<RDFQueryMember> evaluableQueryMembers = askQuery.GetEvaluableQueryMembers().ToList();
             if (evaluableQueryMembers.Any())
