@@ -22,13 +22,14 @@ using System.Data;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace RDFSharp.Model
 {
     /// <summary>
     /// RDFGraph represents a graph in the RDF model.
     /// </summary>
-    public class RDFGraph : RDFDataSource, IEquatable<RDFGraph>, IEnumerable<RDFTriple>
+    public sealed class RDFGraph : RDFDataSource, IEquatable<RDFGraph>, IEnumerable<RDFTriple>
     {
         #region Properties
         /// <summary>
@@ -406,13 +407,13 @@ namespace RDFSharp.Model
                 RDFPatternMember tObject = RDFQueryUtilities.ParseRDFPatternMember(((DataRow)reifiedTriples.Current)["?O"].ToString());
 
                 //Cleanup graph from detected reifications
-                if (tObject is RDFResource)
+                if (tObject is RDFResource resource)
                 {
-                    this.AddTriple(new RDFTriple((RDFResource)tSubject, (RDFResource)tPredicate, (RDFResource)tObject));
+                    this.AddTriple(new RDFTriple((RDFResource)tSubject, (RDFResource)tPredicate, resource));
                     this.RemoveTriple(new RDFTriple((RDFResource)tRepresent, RDFVocabulary.RDF.TYPE, RDFVocabulary.RDF.STATEMENT));
                     this.RemoveTriple(new RDFTriple((RDFResource)tRepresent, RDFVocabulary.RDF.SUBJECT, (RDFResource)tSubject));
                     this.RemoveTriple(new RDFTriple((RDFResource)tRepresent, RDFVocabulary.RDF.PREDICATE, (RDFResource)tPredicate));
-                    this.RemoveTriple(new RDFTriple((RDFResource)tRepresent, RDFVocabulary.RDF.OBJECT, (RDFResource)tObject));
+                    this.RemoveTriple(new RDFTriple((RDFResource)tRepresent, RDFVocabulary.RDF.OBJECT, resource));
                 }
                 else
                 {
@@ -467,11 +468,13 @@ namespace RDFSharp.Model
             RDFGraph result = new RDFGraph();
             if (graph != null)
             {
+                foreach (var t in
                 //Add intersection triples
-                foreach (RDFTriple t in this)
+                from RDFTriple t in this
+                where graph.Triples.ContainsKey(t.TripleID)
+                select t)
                 {
-                    if (graph.Triples.ContainsKey(t.TripleID))
-                        result.AddTriple(t);
+                    result.AddTriple(t);
                 }
             }
             return result;
@@ -734,8 +737,8 @@ namespace RDFSharp.Model
                     throw new RDFModelException("Cannot read RDF graph from datatable because given \"table\" parameter contains a row having null value in the \"?OBJECT\" column.");
 
                 RDFPatternMember rowObj = RDFQueryUtilities.ParseRDFPatternMember(tableRow["?OBJECT"].ToString());
-                if (rowObj is RDFResource)
-                    result.AddTriple(new RDFTriple((RDFResource)rowSubj, (RDFResource)rowPred, (RDFResource)rowObj));
+                if (rowObj is RDFResource resource)
+                    result.AddTriple(new RDFTriple((RDFResource)rowSubj, (RDFResource)rowPred, resource));
                 else
                     result.AddTriple(new RDFTriple((RDFResource)rowSubj, (RDFResource)rowPred, (RDFLiteral)rowObj));
                 #endregion
