@@ -1,4 +1,5 @@
 ﻿using RDFSharp.Model;
+using RDFSharp.NonFunctionalTests;
 using RDFSharp.Query;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,7 @@ namespace RDFSharp.ManualTest
     {
         static void Main(string[] args)
         {
-            
-
+            LoadModels.ReadFromXml(2);
             Console.ReadKey();
         }
     }
