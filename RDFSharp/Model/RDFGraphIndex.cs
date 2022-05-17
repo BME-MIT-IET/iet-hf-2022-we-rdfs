@@ -129,52 +129,40 @@ namespace RDFSharp.Model
             if (triple != null)
             {
                 //Subject
-                if (this.Subjects.ContainsKey(triple.Subject.PatternMemberID))
+                if (this.Subjects.ContainsKey(triple.Subject.PatternMemberID) && this.Subjects[triple.Subject.PatternMemberID].Contains(triple.TripleID))
                 {
-                    if (this.Subjects[triple.Subject.PatternMemberID].Contains(triple.TripleID))
-                    {
-                        this.Subjects[triple.Subject.PatternMemberID].Remove(triple.TripleID);
-                        if (this.Subjects[triple.Subject.PatternMemberID].Count == 0)
-                            this.Subjects.Remove(triple.Subject.PatternMemberID);
-                    }
+                    this.Subjects[triple.Subject.PatternMemberID].Remove(triple.TripleID);
+                    if (this.Subjects[triple.Subject.PatternMemberID].Count == 0)
+                        this.Subjects.Remove(triple.Subject.PatternMemberID);
                 }
 
                 //Predicate
-                if (this.Predicates.ContainsKey(triple.Predicate.PatternMemberID))
+                if (this.Predicates.ContainsKey(triple.Predicate.PatternMemberID) && this.Predicates[triple.Predicate.PatternMemberID].Contains(triple.TripleID))
                 {
-                    if (this.Predicates[triple.Predicate.PatternMemberID].Contains(triple.TripleID))
-                    {
-                        this.Predicates[triple.Predicate.PatternMemberID].Remove(triple.TripleID);
-                        if (this.Predicates[triple.Predicate.PatternMemberID].Count == 0)
-                            this.Predicates.Remove(triple.Predicate.PatternMemberID);
-                    }
+                    this.Predicates[triple.Predicate.PatternMemberID].Remove(triple.TripleID);
+                    if (this.Predicates[triple.Predicate.PatternMemberID].Count == 0)
+                        this.Predicates.Remove(triple.Predicate.PatternMemberID);
                 }
 
                 //Object
                 if (triple.TripleFlavor == RDFModelEnums.RDFTripleFlavors.SPO)
                 {
-                    if (this.Objects.ContainsKey(triple.Object.PatternMemberID))
+                    if (this.Objects.ContainsKey(triple.Object.PatternMemberID) && this.Objects[triple.Object.PatternMemberID].Contains(triple.TripleID))
                     {
-                        if (this.Objects[triple.Object.PatternMemberID].Contains(triple.TripleID))
-                        {
-                            this.Objects[triple.Object.PatternMemberID].Remove(triple.TripleID);
-                            if (this.Objects[triple.Object.PatternMemberID].Count == 0)
-                                this.Objects.Remove(triple.Object.PatternMemberID);
-                        }
+                        this.Objects[triple.Object.PatternMemberID].Remove(triple.TripleID);
+                        if (this.Objects[triple.Object.PatternMemberID].Count == 0)
+                            this.Objects.Remove(triple.Object.PatternMemberID);
                     }
                 }
 
                 //Literal
                 else
                 {
-                    if (this.Literals.ContainsKey(triple.Object.PatternMemberID))
+                    if (this.Literals.ContainsKey(triple.Object.PatternMemberID) && this.Literals[triple.Object.PatternMemberID].Contains(triple.TripleID))
                     {
-                        if (this.Literals[triple.Object.PatternMemberID].Contains(triple.TripleID))
-                        {
-                            this.Literals[triple.Object.PatternMemberID].Remove(triple.TripleID);
-                            if (this.Literals[triple.Object.PatternMemberID].Count == 0)
-                                this.Literals.Remove(triple.Object.PatternMemberID);
-                        }
+                        this.Literals[triple.Object.PatternMemberID].Remove(triple.TripleID);
+                        if (this.Literals[triple.Object.PatternMemberID].Count == 0)
+                            this.Literals.Remove(triple.Object.PatternMemberID);
                     }
                 }
             }
