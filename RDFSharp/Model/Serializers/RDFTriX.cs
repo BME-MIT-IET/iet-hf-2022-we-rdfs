@@ -203,7 +203,6 @@ namespace RDFSharp.Model
                 {
                     using (XmlTextReader trixReader = new XmlTextReader(streamReader))
                     {
-                        trixReader.XmlResolver = null;
                         trixReader.DtdProcessing = DtdProcessing.Parse;
                         trixReader.Normalization = false;
                         XmlDocument trixDoc = new XmlDocument();
