@@ -298,11 +298,8 @@ namespace RDFSharp.Model
                     throw new Exception("subject (" + graphChild.ChildNodes[0].Name + ") of \"<triple>\" element has \"<uri>\" or \"<id>\" element without value.");
 
                 //Sanitize eventual blank node value
-                if (graphChild.ChildNodes[0].Name.Equals("id", StringComparison.Ordinal))
-                {
-                    if (!graphChild.ChildNodes[0].InnerText.StartsWith("bnode:"))
-                        graphChild.ChildNodes[0].InnerText = string.Concat("bnode:", graphChild.ChildNodes[0].InnerText.Replace("_:", string.Empty));
-                }
+                if (graphChild.ChildNodes[0].Name.Equals("id", StringComparison.Ordinal) && !graphChild.ChildNodes[0].InnerText.StartsWith("bnode:"))
+                    graphChild.ChildNodes[0].InnerText = string.Concat("bnode:", graphChild.ChildNodes[0].InnerText.Replace("_:", string.Empty));
             }
             //Subject unrecognized: exception must be raised
             else
@@ -328,11 +325,8 @@ namespace RDFSharp.Model
                     throw new Exception("object (" + graphChild.ChildNodes[2].Name + ") of \"<triple>\" element has \"<uri>\" or \"<id>\" element without value.");
 
                 //Sanitize eventual blank node value
-                if (graphChild.ChildNodes[2].Name.Equals("id", StringComparison.Ordinal))
-                {
-                    if (!graphChild.ChildNodes[2].InnerText.StartsWith("bnode:"))
-                        graphChild.ChildNodes[2].InnerText = string.Concat("bnode:", graphChild.ChildNodes[2].InnerText.Replace("_:", string.Empty));
-                }
+                if (graphChild.ChildNodes[2].Name.Equals("id", StringComparison.Ordinal) && !graphChild.ChildNodes[2].InnerText.StartsWith("bnode:"))
+                    graphChild.ChildNodes[2].InnerText = string.Concat("bnode:", graphChild.ChildNodes[2].InnerText.Replace("_:", string.Empty));
 
                 result.AddTriple(new RDFTriple(new RDFResource(graphChild.ChildNodes[0].InnerText),
                                                 new RDFResource(graphChild.ChildNodes[1].InnerText),

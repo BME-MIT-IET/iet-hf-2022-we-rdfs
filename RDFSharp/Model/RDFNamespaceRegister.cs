@@ -143,11 +143,8 @@ namespace RDFSharp.Model
         /// </summary>
         public static void AddNamespace(RDFNamespace nSpace)
         {
-            if (nSpace != null)
-            {
-                if (GetByPrefix(nSpace.NamespacePrefix) == null && GetByUri(nSpace.NamespaceUri.ToString()) == null)
-                    Instance.Register.Add(nSpace);
-            }
+            if (nSpace != null && GetByPrefix(nSpace.NamespacePrefix) == null && GetByUri(nSpace.NamespaceUri.ToString()) == null)
+                Instance.Register.Add(nSpace);
         }
 
         /// <summary>
