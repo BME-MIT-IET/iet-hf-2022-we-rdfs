@@ -12,16 +12,9 @@ namespace RDFSharp.ManualTest
     {
         static void Main(string[] args)
         {
-            /*
-             * 1. Teszt:
-             *       Bemenet: szepmuveszeti.rdf
-             *       Elvárt kimenet: TODO
-             *
-             *       Lekérdezzük a gyakorlati queryket (3 db kb)
-             *       Összehasonlítjuk a kimenetet az elvárt kimenettel.
-             *
-             */
             Test1.Run();
+
+            Test2.Run();
 
             Console.ReadKey();
         }
