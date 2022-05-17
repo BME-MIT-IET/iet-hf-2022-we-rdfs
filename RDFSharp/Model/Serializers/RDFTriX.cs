@@ -194,6 +194,12 @@ namespace RDFSharp.Model
         /// </summary>
         internal static RDFGraph Deserialize(Stream inputStream, Uri graphContext)
         {
+
+            /*
+             * XmlReader reader = XmlReader.Create("xxe.xml"); // Compliant: XmlReader is safe by default
+                while (reader.Read())
+             */
+
             try
             {
                 #region deserialize
@@ -203,8 +209,6 @@ namespace RDFSharp.Model
                 {
                     using (XmlTextReader trixReader = new XmlTextReader(streamReader))
                     {
-                        trixReader.XmlResolver = null;
-                        trixReader.DtdProcessing = DtdProcessing.Parse;
                         trixReader.Normalization = false;
                         XmlDocument trixDoc = new XmlDocument();
                         trixDoc.Load(trixReader);
