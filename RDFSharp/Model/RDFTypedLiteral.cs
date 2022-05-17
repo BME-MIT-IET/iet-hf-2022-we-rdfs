@@ -28,25 +28,15 @@ namespace RDFSharp.Model
         /// </summary>
         public RDFModelEnums.RDFDatatypes Datatype { get; internal set; }
 
-
-
         /// <summary>
         /// Represents an handy typed literal for boolean True
         /// </summary>
-<<<<<<< HEAD
-        public static RDFTypedLiteral True { get; set; } = new RDFTypedLiteral("true", RDFModelEnums.RDFDatatypes.XSD_BOOLEAN);
-=======
         public static readonly RDFTypedLiteral True = new RDFTypedLiteral("true", RDFModelEnums.RDFDatatypes.XSD_BOOLEAN);
->>>>>>> main
 
         /// <summary>
         /// Represents an handy typed literal for boolean False
         /// </summary>
-<<<<<<< HEAD
-        public static RDFTypedLiteral False { get; set; } = new RDFTypedLiteral("false", RDFModelEnums.RDFDatatypes.XSD_BOOLEAN);
-=======
         public static readonly RDFTypedLiteral False = new RDFTypedLiteral("false", RDFModelEnums.RDFDatatypes.XSD_BOOLEAN);
->>>>>>> main
         #endregion
 
         #region Ctors
