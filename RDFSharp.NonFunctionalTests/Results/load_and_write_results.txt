@@ -1,0 +1,48 @@
+Loading an rdf/xml file
+	1. iteration: loading time is 10493,2529 ms
+	2. iteration: loading time is 12588,0272 ms
+	3. iteration: loading time is 12649,0697 ms
+	4. iteration: loading time is 13601,2534 ms
+	5. iteration: loading time is 8374,6385 ms
+Total loading time:57706,2417 ms, Average loading time:11541,24834 ms
+
+Loading an n-triples file
+	1. iteration: loading time is 12557,4958 ms
+	2. iteration: loading time is 13845,3849 ms
+	3. iteration: loading time is 13686,5394 ms
+	4. iteration: loading time is 15528,5177 ms
+	5. iteration: loading time is 17184,8603 ms
+Total loading time:72802,7981 ms, Average loading time:14560,55962 ms
+
+Loading a triX file
+	1. iteration: loading time is 13325,7719 ms
+	2. iteration: loading time is 12619,3275 ms
+	3. iteration: loading time is 9619,5585 ms
+	4. iteration: loading time is 8974,0254 ms
+	5. iteration: loading time is 9197,6903 ms
+Total loading time:53736,3736 ms, Average loading time:10747,27472 ms
+
+Writing an rdf/xml file
+	1. iteration: writing time is 44153,1878 ms
+	2. iteration: writing time is 44792,5989 ms
+	3. iteration: writing time is 48197,0828 ms
+	4. iteration: writing time is 41602,2049 ms
+	5. iteration: writing time is 55913,7728 ms
+Total writing time:234658,8472 ms, Average writing time:46931,76944 ms
+
+Writing an n-triple file
+	1. iteration: writing time is 1922,9158 ms
+	2. iteration: writing time is 1417,4882 ms
+	3. iteration: writing time is 1825,8809 ms
+	4. iteration: writing time is 1358,7647 ms
+	5. iteration: writing time is 1330,9692 ms
+Total writing time:7856,0188 ms, Average writing time:1571,2037599999999 ms
+
+Writing a TriX file
+	1. iteration: writing time is 1176,9339 ms
+	2. iteration: writing time is 1046,1902 ms
+	3. iteration: writing time is 1490,8768 ms
+	4. iteration: writing time is 1703,9933 ms
+	5. iteration: writing time is 1127,8793 ms
+Total writing time:6545,8735 ms, Average writing time:1309,1747 ms
+
