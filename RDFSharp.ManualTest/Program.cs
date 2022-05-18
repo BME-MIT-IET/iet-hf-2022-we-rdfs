@@ -25,11 +25,11 @@ namespace RDFSharp.ManualTest
             var format = RDFModelEnums.RDFFormats.RdfXml;
             var graph = RDFGraph.FromFile(format, "szepmuveszeti.rdf");
             //Test1.Run();
-            Test2.Run();
-            //Test3.Run(graph);
-            Test1.Run();
+            //Test2.Run();
+            Test3.Run(graph);
+            //Test1.Run();
 
-            Test4.Run();
+            //Test4.Run();
 
             Console.ReadKey();
         }

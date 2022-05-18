@@ -57,8 +57,8 @@ namespace RDFSharp.ManualTest
                 .AddProjectionVariable(thing);
 
 
-            var query3Result = query3.ApplyToGraph(graph);
-            query3Result.ToSparqlXmlResult("result3.srq");
+            var query3Result = query3.ApplyToGraph(graph).SelectResultsCount;
+            Console.WriteLine(query3Result);
 
 
             // Assert result with expected value
