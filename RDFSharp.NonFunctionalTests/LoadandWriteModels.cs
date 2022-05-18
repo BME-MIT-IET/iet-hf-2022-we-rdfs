@@ -12,7 +12,7 @@ namespace RDFSharp.NonFunctionalTests
     /// </summary>
     public class LoadandWriteModels
     {
-        private static string ResultsFileName = "results.txt";
+        private static string ResultsFileName = "load_and_write_results.txt";
 
         private static RDFGraph Graph;
 

@@ -14,7 +14,7 @@ namespace RDFSharp.ManualTest
         static void Main(string[] args)
         {
 
-            LoadandWriteModels.CreateFiles();
+            /*LoadandWriteModels.CreateFiles();
 
             LoadandWriteModels.TestXmlRead(3);
             LoadandWriteModels.TestN3Read(3);
@@ -27,7 +27,11 @@ namespace RDFSharp.ManualTest
             LoadandWriteModels.TestN3Write(3);
             LoadandWriteModels.TestTrixWrite(3);
 
-            Console.WriteLine("Writing done");
+            Console.WriteLine("Writing done");*/
+
+            Queries.Run();
+
+            Console.WriteLine("All tests are finished.");
             Console.ReadKey();
         }
     }
