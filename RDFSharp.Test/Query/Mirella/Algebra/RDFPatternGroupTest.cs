@@ -43,11 +43,11 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.Variables.Count == 0);
             Assert.IsTrue(pGroup.ToString().Equals(string.Concat("  {", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
-            Assert.IsTrue(pGroup.GetPatterns().Count() == 0);
-            Assert.IsTrue(pGroup.GetFilters().Count() == 0);
-            Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 0);
-            Assert.IsTrue(pGroup.GetValues().Count() == 0);
-            Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 0);
+            Assert.IsTrue(!pGroup.GetPatterns().Any());
+            Assert.IsTrue(!pGroup.GetFilters().Any());
+            Assert.IsTrue(!pGroup.GetPropertyPaths().Any());
+            Assert.IsTrue(!pGroup.GetValues().Any());
+            Assert.IsTrue(!pGroup.GetEvaluablePatternGroupMembers().Any());
         }
 
         [TestMethod]
@@ -70,11 +70,11 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.Variables.Count == 0);
             Assert.IsTrue(pGroup.ToString().Equals(string.Concat("  OPTIONAL {", Environment.NewLine, "    {", Environment.NewLine, "    }", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
-            Assert.IsTrue(pGroup.GetPatterns().Count() == 0);
-            Assert.IsTrue(pGroup.GetFilters().Count() == 0);
-            Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 0);
-            Assert.IsTrue(pGroup.GetValues().Count() == 0);
-            Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 0);
+            Assert.IsTrue(!pGroup.GetPatterns().Any());
+            Assert.IsTrue(!pGroup.GetFilters().Any());
+            Assert.IsTrue(!pGroup.GetPropertyPaths().Any());
+            Assert.IsTrue(!pGroup.GetValues().Any());
+            Assert.IsTrue(!pGroup.GetEvaluablePatternGroupMembers().Any());
         }
 
         [TestMethod]
@@ -93,11 +93,11 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.Variables.Count == 0);
             Assert.IsTrue(pGroup.ToString().Equals(string.Concat("  {", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
-            Assert.IsTrue(pGroup.GetPatterns().Count() == 0);
-            Assert.IsTrue(pGroup.GetFilters().Count() == 0);
-            Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 0);
-            Assert.IsTrue(pGroup.GetValues().Count() == 0);
-            Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 0);
+            Assert.IsTrue(!pGroup.GetPatterns().Any());
+            Assert.IsTrue(!pGroup.GetFilters().Any());
+            Assert.IsTrue(!pGroup.GetPropertyPaths().Any());
+            Assert.IsTrue(!pGroup.GetValues().Any());
+            Assert.IsTrue(!pGroup.GetEvaluablePatternGroupMembers().Any());
         }
 
         [TestMethod]
@@ -130,9 +130,9 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.ToString(new List<RDFNamespace>() { RDFNamespaceRegister.GetByPrefix("rdf") }).Equals(string.Concat("  {", Environment.NewLine, "    ?S rdf:type <http://www.w3.org/2002/07/owl#Class> .", Environment.NewLine,"    ?S ?P ?O .", Environment.NewLine, "    GRAPH ?C { ?S rdf:type <http://www.w3.org/2002/07/owl#Class> } .", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
             Assert.IsTrue(pGroup.GetPatterns().Count() == 3);
-            Assert.IsTrue(pGroup.GetFilters().Count() == 0);
-            Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 0);
-            Assert.IsTrue(pGroup.GetValues().Count() == 0);
+            Assert.IsTrue(!pGroup.GetFilters().Any());
+            Assert.IsTrue(!pGroup.GetPropertyPaths().Any());
+            Assert.IsTrue(!pGroup.GetValues().Any());
             Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 3);
         }
 
@@ -173,8 +173,8 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
             Assert.IsTrue(pGroup.GetPatterns().Count() == 3);
             Assert.IsTrue(pGroup.GetFilters().Count() == 1);
-            Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 0);
-            Assert.IsTrue(pGroup.GetValues().Count() == 0);
+            Assert.IsTrue(!pGroup.GetPropertyPaths().Any());
+            Assert.IsTrue(!pGroup.GetValues().Any());
             Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 3);
         }
 
@@ -206,9 +206,9 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.ToString(new List<RDFNamespace>() { RDFNamespaceRegister.GetByPrefix("rdf") }).Equals(string.Concat("  {", Environment.NewLine, "    ?S rdf:type <http://www.w3.org/2002/07/owl#Class> .", Environment.NewLine,"    ?S ?P ?O .", Environment.NewLine, "    GRAPH ?C { ?S rdf:type <http://www.w3.org/2002/07/owl#Class> } .", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
             Assert.IsTrue(pGroup.GetPatterns().Count() == 3);
-            Assert.IsTrue(pGroup.GetFilters().Count() == 0);
-            Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 0);
-            Assert.IsTrue(pGroup.GetValues().Count() == 0);
+            Assert.IsTrue(!pGroup.GetFilters().Any());
+            Assert.IsTrue(!pGroup.GetPropertyPaths().Any());
+            Assert.IsTrue(!pGroup.GetValues().Any());
             Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 3);
         }
 
@@ -233,11 +233,11 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.ToString().Equals(string.Concat("  {", Environment.NewLine, "    FILTER ( ISURI(?S) ) ", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.ToString(new List<RDFNamespace>() { RDFNamespaceRegister.GetByPrefix("rdf") }).Equals(string.Concat("  {", Environment.NewLine, "    FILTER ( ISURI(?S) ) ", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
-            Assert.IsTrue(pGroup.GetPatterns().Count() == 0);
+            Assert.IsTrue(!pGroup.GetPatterns().Any());
             Assert.IsTrue(pGroup.GetFilters().Count() == 1);
-            Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 0);
-            Assert.IsTrue(pGroup.GetValues().Count() == 0);
-            Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 0);
+            Assert.IsTrue(!pGroup.GetPropertyPaths().Any());
+            Assert.IsTrue(!pGroup.GetValues().Any());
+            Assert.IsTrue(!pGroup.GetEvaluablePatternGroupMembers().Any());
         }
 
         [TestMethod]
@@ -262,10 +262,10 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.ToString().Equals(string.Concat("  {", Environment.NewLine, "    ?S <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>/<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?E .", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.ToString(new List<RDFNamespace>() { RDFNamespaceRegister.GetByPrefix("rdf") }).Equals(string.Concat("  {", Environment.NewLine, "    ?S rdf:type/rdf:type ?E .", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
-            Assert.IsTrue(pGroup.GetPatterns().Count() == 0);
-            Assert.IsTrue(pGroup.GetFilters().Count() == 0);
+            Assert.IsTrue(!pGroup.GetPatterns().Any());
+            Assert.IsTrue(!pGroup.GetFilters().Any());
             Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 1);
-            Assert.IsTrue(pGroup.GetValues().Count() == 0);
+            Assert.IsTrue(!pGroup.GetValues().Any());
             Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 1);
         }
 
@@ -290,9 +290,9 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.ToString().Equals(string.Concat("  {", Environment.NewLine, "    VALUES ?S { \"lit\" } .", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.ToString(new List<RDFNamespace>() { RDFNamespaceRegister.GetByPrefix("rdf") }).Equals(string.Concat("  {", Environment.NewLine, "    VALUES ?S { \"lit\" } .", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
-            Assert.IsTrue(pGroup.GetPatterns().Count() == 0);
-            Assert.IsTrue(pGroup.GetFilters().Count() == 0);
-            Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 0);
+            Assert.IsTrue(!pGroup.GetPatterns().Any());
+            Assert.IsTrue(!pGroup.GetFilters().Any());
+            Assert.IsTrue(!pGroup.GetPropertyPaths().Any());
             Assert.IsTrue(pGroup.GetValues().Count() == 1);
             Assert.IsTrue(pGroup.GetValues().ToList().TrueForAll(v => !v.IsInjected));
             Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 1);
@@ -318,9 +318,9 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(pGroup.ToString().Equals(string.Concat("  {", Environment.NewLine, "  }", Environment.NewLine))); //Injected values are not printed since they are hidden
             Assert.IsTrue(pGroup.ToString(new List<RDFNamespace>() { RDFNamespaceRegister.GetByPrefix("rdf") }).Equals(string.Concat("  {", Environment.NewLine, "  }", Environment.NewLine)));
             Assert.IsTrue(pGroup.QueryMemberID.Equals(RDFModelUtilities.CreateHash(pGroup.QueryMemberStringID)));
-            Assert.IsTrue(pGroup.GetPatterns().Count() == 0);
-            Assert.IsTrue(pGroup.GetFilters().Count() == 0);
-            Assert.IsTrue(pGroup.GetPropertyPaths().Count() == 0);
+            Assert.IsTrue(!pGroup.GetPatterns().Any());
+            Assert.IsTrue(!pGroup.GetFilters().Any());
+            Assert.IsTrue(!pGroup.GetPropertyPaths().Any());
             Assert.IsTrue(pGroup.GetValues().Count() == 1);
             Assert.IsTrue(pGroup.GetValues().ToList().TrueForAll(v => v.IsInjected));
             Assert.IsTrue(pGroup.GetEvaluablePatternGroupMembers().Count() == 1);
