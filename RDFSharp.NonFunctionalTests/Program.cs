@@ -19,10 +19,15 @@ namespace RDFSharp.ManualTest
             LoadandWriteModels.TestXmlRead(3);
             LoadandWriteModels.TestN3Read(3);
             LoadandWriteModels.TestTrixRead(3);
-
-
             //LoadandWriteModels.TestTurtle(3);
-            Console.WriteLine("done");
+
+            Console.WriteLine("Reading done");
+
+            LoadandWriteModels.TestXmlWrite(3);
+            LoadandWriteModels.TestN3Write(3);
+            LoadandWriteModels.TestTrixWrite(3);
+
+            Console.WriteLine("Writing done");
             Console.ReadKey();
         }
     }
