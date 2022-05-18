@@ -34,11 +34,11 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
         [TestMethod]
         public void ShouldThrowExceptionOnRDFExistsFilterBecauseFilterIsWrong()
         {
-            RDFPlainLiteral literal_x = new("x");
-            RDFPlainLiteral literal_y = new("y");
+            RDFResource literal_x = new RDFResource(RDFVocabulary.DC.BASE_URI + "x") ;
+            RDFPlainLiteral literal_y = new("y");         
             //Act and Assert
             //legalább az egyiknek változónak kell lennie!
-            Assert.ThrowsException<RDFQueryException>(() => new RDFExistsFilter(new RDFPattern(literal_x, knows, literal_y)));
+            Assert.ThrowsException<RDFQueryException>(() => new RDFExistsFilter( new RDFPattern(literal_x, knows, literal_y)));
         }
 
         [TestMethod]
@@ -129,7 +129,8 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
         [TestMethod]
         public void RDFExistsFilterApplyFilterNotDisjointButSubjectComparedIsTrue()
         {
-            //Arrange         
+            //Arrange
+           
             var pattern = new RDFPattern(x, knows, y);
             RDFExistsFilter n = new RDFExistsFilter(pattern);
 
@@ -166,16 +167,16 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
         public void RDFExistsFilterApplyFilterNotDisjointButPredicateComparedIsTrue()
         {
             //Arrange         
-            var pattern = new RDFPattern(x, knows, y);
+            var v = new RDFVariable("z");
+            var pattern = new RDFPattern(x, v, y);
             RDFExistsFilter n = new RDFExistsFilter(pattern);
-          
             DataTable table = new DataTable();
             //táblázat oszlopai
-            table.Columns.Add(knows.ToString(), typeof(string));
+            table.Columns.Add("?Z", typeof(string));
             table.Columns.Add("?B", typeof(string));
             //táblázat oszlopai
             DataRow row = table.NewRow();
-            row[knows.ToString()] = new RDFPlainLiteral("hello", "en-US").ToString();
+            row["?Z"] = new RDFPlainLiteral("hello", "en-US").ToString();
             row["?B"] = null;
             table.Rows.Add(row);
             table.AcceptChanges();
@@ -183,10 +184,10 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
             n.PatternResults = table;
 
             DataTable table2 = new DataTable();
-            table2.Columns.Add("http://purl.org/dc/elements/1.1/knows", typeof(string));
+            table2.Columns.Add("?Z", typeof(string));
             table2.Columns.Add("?B", typeof(string));
             DataRow row2 = table2.NewRow();
-            row2["http://purl.org/dc/elements/1.1/knows"] = new RDFPlainLiteral("hello", "en-US").ToString();
+            row2["?Z"] = new RDFPlainLiteral("hello", "en-US").ToString();
             row2["?B"] = new RDFPlainLiteral("bonjour", "fr-FR").ToString();
             table2.Rows.Add(row2);
             table2.AcceptChanges();
