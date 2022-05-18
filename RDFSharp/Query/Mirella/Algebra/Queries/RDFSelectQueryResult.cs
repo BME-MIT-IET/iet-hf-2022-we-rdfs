@@ -185,7 +185,7 @@ namespace RDFSharp.Query
             }
         }
 
-        public object SelectResultsCount()
+        public object SelectResultCount()
         {
             throw new NotImplementedException();
         }

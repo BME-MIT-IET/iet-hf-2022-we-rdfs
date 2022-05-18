@@ -1,4 +1,5 @@
-﻿using RDFSharp.Model;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RDFSharp.Model;
 using RDFSharp.Query;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace RDFSharp.ManualTest
 
         public static void Run(RDFGraph graph)
         {
-           
+            Console.WriteLine("======================[Running Test3]======================");
 
             /* SparQL:
              * -----------------------------------------------------
@@ -47,9 +48,6 @@ namespace RDFSharp.ManualTest
                 .AddPrefix(RDFNamespaceRegister.GetByPrefix("rdf"))
                 .AddPrefix(RDFNamespaceRegister.GetByPrefix("ecrm"))            
                 .AddPatternGroup(new RDFPatternGroup("PG1")
-                    /*.AddPattern(new RDFPattern(actor, RDFVocabulary.RDF.TYPE, actorType))
-                    .AddPattern(new RDFPattern(creation, RDFVocabulary.RDF.TYPE, creationType))
-                    .AddPattern(new RDFPattern(thing, RDFVocabulary.RDF.TYPE, thingType))*/
                     .AddPattern(new RDFPattern(creation,hadParticipant,actor))
                     .AddPattern(new RDFPattern(thing,wasPresentAt,creation))) 
                 .AddProjectionVariable(actor)
@@ -58,11 +56,13 @@ namespace RDFSharp.ManualTest
 
 
             var query3Result = query3.ApplyToGraph(graph).SelectResultsCount;
-            Console.WriteLine(query3Result);
+            Console.WriteLine($"Count of result:{query3Result}");
 
 
             // Assert result with expected value
-            // TODO
+            Assert.IsTrue(query3Result == 4409);
+            Console.WriteLine("\t--> Test result: " + (query3Result == 4409 ? "Success" : "Fail"));
+            Console.WriteLine("======================[Test3 Done.]========================\n");
         }
     }
 }

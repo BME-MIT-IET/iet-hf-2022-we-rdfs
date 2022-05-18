@@ -1,4 +1,5 @@
-﻿using RDFSharp.Model;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RDFSharp.Model;
 using RDFSharp.Query;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,9 @@ namespace RDFSharp.ManualTest
 {
     public class Test2
     {
-        public static void Run()
+        public static void Run(RDFGraph graph)
         {
-            // Read RDF Graph from file
-            var format = RDFModelEnums.RDFFormats.RdfXml;
-            var graph = RDFGraph.FromFile(format, "szepmuveszeti.rdf");
+            Console.WriteLine("======================[Running Test2]======================");
 
             /* SparQL:
              * -----------------------------------------------------
@@ -49,13 +48,14 @@ namespace RDFSharp.ManualTest
                 .AddProjectionVariable(name);
      
 
-            var query2Result = query2.ApplyToGraph(graph);
-            //query2Result.ToSparqlXmlResult("result2.srq");
-            var result2 = query2Result.SelectResultsCount;
-            Console.WriteLine(result2);
- 
+            var query2Result = query2.ApplyToGraph(graph).SelectResultsCount;
+            Console.WriteLine($"Count of result:{query2Result}");
+            
+
             // Assert result with expected value
-            // TODO
+            Assert.IsTrue(query2Result == 54);
+            Console.WriteLine("\t--> Test result: " + (query2Result == 54 ? "Success" : "Fail"));
+            Console.WriteLine("======================[Test2 Done.]========================\n");
         }
     }
 }
