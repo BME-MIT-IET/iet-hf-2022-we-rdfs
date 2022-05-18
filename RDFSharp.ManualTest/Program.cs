@@ -21,8 +21,12 @@ namespace RDFSharp.ManualTest
              *       Összehasonlítjuk a kimenetet az elvárt kimenettel.
              *
              */
-            Test1.Run();
-
+            // Read RDF Graph from file
+            var format = RDFModelEnums.RDFFormats.RdfXml;
+            var graph = RDFGraph.FromFile(format, "szepmuveszeti.rdf");
+            //Test1.Run();
+            Test2.Run();
+            //Test3.Run(graph);
             Console.ReadKey();
         }
     }

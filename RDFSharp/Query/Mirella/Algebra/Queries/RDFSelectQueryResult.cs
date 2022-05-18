@@ -185,6 +185,11 @@ namespace RDFSharp.Query
             }
         }
 
+        public object SelectResultsCount()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Asynchronously writes the "SPARQL Query Results XML Format" stream corresponding to the SELECT query result
         /// </summary>
