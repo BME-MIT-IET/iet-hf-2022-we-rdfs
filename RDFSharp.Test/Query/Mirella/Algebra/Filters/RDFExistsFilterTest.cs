@@ -10,7 +10,23 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
     [TestClass]
     public class RDFExistsFilterTest
     {
+
+        public RDFVariable x;
+        public RDFVariable y;
+        public RDFResource knows;
+        public RDFExistsFilter filter;
+
+        [TestInitialize]
+        public void Init()
+        {
+            x = new RDFVariable("x");
+            y = new RDFVariable("y");
+            knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
+            filter = new(new RDFPattern(x, knows, y));
+        }
+
         #region RDFExistsFilter
+
         [TestMethod]
         public void ShouldThrowExceptionOnRDFExistsFilterBecauseFilterNull()
              => Assert.ThrowsException<RDFQueryException>(() => new RDFExistsFilter(null));
@@ -18,22 +34,19 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
         [TestMethod]
         public void ShouldThrowExceptionOnRDFExistsFilterBecauseFilterIsWrong()
         {
-            RDFPlainLiteral x = new RDFPlainLiteral("x");
-            RDFPlainLiteral y = new RDFPlainLiteral("y");
-            RDFResource knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
-            
-            Assert.ThrowsException<RDFQueryException>(() => new RDFExistsFilter(new RDFPattern(x, knows, y)));
+            RDFResource literal_x = new RDFResource(RDFVocabulary.DC.BASE_URI + "x") ;
+            RDFPlainLiteral literal_y = new("y");         
+            //Act and Assert
+            //legalább az egyiknek változónak kell lennie!
+            Assert.ThrowsException<RDFQueryException>(() => new RDFExistsFilter( new RDFPattern(literal_x, knows, literal_y)));
         }
 
         [TestMethod]
         public void RDFExistsFilterOK()
-        {
-            RDFVariable x = new RDFVariable("x");
-            RDFVariable y = new RDFVariable("y");
-            RDFResource knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
+        {           
             var pattern = new RDFPattern(x, knows, y);
-            RDFExistsFilter filter = new RDFExistsFilter(pattern);
-            Assert.AreEqual<RDFPattern>(pattern, filter.Pattern);
+            RDFExistsFilter filter_pattern = new RDFExistsFilter(pattern);
+            Assert.AreEqual<RDFPattern>(pattern, filter_pattern.Pattern);
             Assert.IsTrue(filter.IsEvaluable);
         }
 
@@ -41,9 +54,6 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
         public void RDFExistsFilterToString()
         {
             //Arrange
-            RDFVariable x = new RDFVariable("x");
-            RDFVariable y = new RDFVariable("y");
-            RDFResource knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
             var pattern = new RDFPattern(x, knows, y);
 
             //Act
@@ -57,16 +67,15 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
         [TestMethod]
         public void RDFExistsFilterApplyFilterContains()
         {
-            //Arrange
-            RDFVariable x = new RDFVariable("x");
-            RDFVariable y = new RDFVariable("y");
-            RDFResource knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
+            //Arrange      
             var pattern = new RDFPattern(x, knows, y);
             RDFExistsFilter n = new RDFExistsFilter(pattern);
 
             DataTable table = new DataTable();
+            //táblázat oszlopai
             table.Columns.Add("?A", typeof(string));
             table.Columns.Add("?B", typeof(string));
+            //táblázat sorai
             DataRow row = table.NewRow();
             row["?A"] = null;
             row["?B"] = new RDFPlainLiteral("hello", "en-US").ToString();
@@ -75,67 +84,177 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
 
             n.PatternResults = table;
 
-            //Assert
+            //Act and Assert
+            //A megadott oszlopainkat nem tartalmazza a pattern, tehát diszjunkt halmazt alkotnak, ezért az új sort hozzáadjuk, az eredmény true
             Assert.IsTrue(n.ApplyFilter(row, false));
+            //A második paraméter negálja az előzőt, tehát ennek false-nak kell lennie
+            Assert.IsFalse(n.ApplyFilter(row, true));
         }
 
+
         [TestMethod]
-        public void RDFExistsFilterApplyFilterNotContains()
+        public void RDFExistsFilterApplyFilterNotDisjointAndComparedISFalse()
         {
-            //Arrange
-            RDFVariable x = new RDFVariable("x");
-            RDFVariable y = new RDFVariable("y");
-            RDFResource knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
+            //Arrange         
             var pattern = new RDFPattern(x, knows, y);
             RDFExistsFilter n = new RDFExistsFilter(pattern);
 
             DataTable table = new DataTable();
+            //táblázat oszlopai
             table.Columns.Add("?A", typeof(string));
             table.Columns.Add("?B", typeof(string));
+            //táblázat oszlopai
             DataRow row = table.NewRow();
             row["?A"] = null;
             row["?B"] = new RDFPlainLiteral("hello", "en-US").ToString();
             table.Rows.Add(row);
             table.AcceptChanges();
-
-            n.PatternResults = table; 
             
+            n.PatternResults = table;
+
             DataTable table2 = new DataTable();
-            table.Columns.Add("?C", typeof(string));
-            table.Columns.Add("?D", typeof(string));
-            DataRow row2 = table.NewRow();
-            row2["?C"] = null;
-            row2["?D"] = new RDFPlainLiteral("bonjour", "fr-FR").ToString();
-            table.Rows.Add(row2);
-            table.AcceptChanges();
+            table2.Columns.Add("?X", typeof(string));
+            DataRow row2 = table2.NewRow();
+            row2["?X"] = new RDFPlainLiteral("bonjour", "fr-FR").ToString();
+            table2.Rows.Add(row2);
+            table2.AcceptChanges();
 
             //Assert
+            //A megadott oszlop és a pattern nem diszjunkt halmaz, és az Alany az Állítmány és a Tárgy is különbözik, ezért nem tarthatjuk meg a sort.
+            Assert.IsFalse(n.ApplyFilter(row2, false));
+            //A második paraméter negálja az előzőt, tehát ennek false-nak kell lennie
+            Assert.IsTrue(n.ApplyFilter(row2, true));
+        }
+
+        [TestMethod]
+        public void RDFExistsFilterApplyFilterNotDisjointButSubjectComparedIsTrue()
+        {
+            //Arrange
+           
+            var pattern = new RDFPattern(x, knows, y);
+            RDFExistsFilter n = new RDFExistsFilter(pattern);
+
+            DataTable table = new DataTable();
+            //táblázat oszlopai
+            table.Columns.Add("?X", typeof(string));
+            table.Columns.Add("?B", typeof(string));
+            //táblázat oszlopai
+            DataRow row = table.NewRow();
+            row["?X"] = new RDFPlainLiteral("hello", "en-US").ToString(); 
+            row["?B"] = null;
+            table.Rows.Add(row);
+            table.AcceptChanges();
+
+            n.PatternResults = table;
+
+            DataTable table2 = new DataTable();
+            table2.Columns.Add("?X", typeof(string));
+            table2.Columns.Add("?B", typeof(string));
+            DataRow row2 = table2.NewRow();
+            row2["?X"] = new RDFPlainLiteral("hello", "en-US").ToString();
+            row2["?B"] = new RDFPlainLiteral("bonjour", "fr-FR").ToString();
+            table2.Rows.Add(row2);
+            table2.AcceptChanges();
+
+            //Assert
+            //A megadott oszlop és a pattern nem diszjunkt halmaz, de az Alany a sorban és a pattern-ben megegyezik, ezért itt megtartjuk.
             Assert.IsTrue(n.ApplyFilter(row2, false));
+            //A második paraméter negálja az előzőt, tehát ennek false-nak kell lennie
             Assert.IsFalse(n.ApplyFilter(row2, true));
         }
+
+        [TestMethod]
+        public void RDFExistsFilterApplyFilterNotDisjointButPredicateComparedIsTrue()
+        {
+            //Arrange         
+            var v = new RDFVariable("z");
+            var pattern = new RDFPattern(x, v, y);
+            RDFExistsFilter n = new RDFExistsFilter(pattern);
+            DataTable table = new DataTable();
+            //táblázat oszlopai
+            table.Columns.Add("?Z", typeof(string));
+            table.Columns.Add("?B", typeof(string));
+            //táblázat oszlopai
+            DataRow row = table.NewRow();
+            row["?Z"] = new RDFPlainLiteral("hello", "en-US").ToString();
+            row["?B"] = null;
+            table.Rows.Add(row);
+            table.AcceptChanges();
+
+            n.PatternResults = table;
+
+            DataTable table2 = new DataTable();
+            table2.Columns.Add("?Z", typeof(string));
+            table2.Columns.Add("?B", typeof(string));
+            DataRow row2 = table2.NewRow();
+            row2["?Z"] = new RDFPlainLiteral("hello", "en-US").ToString();
+            row2["?B"] = new RDFPlainLiteral("bonjour", "fr-FR").ToString();
+            table2.Rows.Add(row2);
+            table2.AcceptChanges();
+
+            //Assert
+            //A megadott oszlop és a pattern nem diszjunkt halmaz, de az Állítmány a sorban és a pattern-ben megegyezik, ezért itt megtartjuk.
+            Assert.IsTrue(n.ApplyFilter(row2, false));
+            //A második paraméter negálja az előzőt, tehát ennek false-nak kell lennie
+            Assert.IsFalse(n.ApplyFilter(row2, true));
+        }
+
+        [TestMethod]
+        public void RDFExistsFilterApplyFilterNotDisjointButObjectComparedIsTrue()
+        {
+            //Arrange         
+            var pattern = new RDFPattern(x, knows, y);
+            RDFExistsFilter n = new RDFExistsFilter(pattern);
+
+            DataTable table = new DataTable();
+            //táblázat oszlopai
+            table.Columns.Add("?Y", typeof(string));
+            table.Columns.Add("?B", typeof(string));
+            //táblázat oszlopai
+            DataRow row = table.NewRow();
+            row["?Y"] = new RDFPlainLiteral("hello", "en-US").ToString();
+            row["?B"] = null;
+            table.Rows.Add(row);
+            table.AcceptChanges();
+
+            n.PatternResults = table;
+
+            DataTable table2 = new DataTable();
+            table2.Columns.Add("?Y", typeof(string));
+            table2.Columns.Add("?B", typeof(string));
+            DataRow row2 = table2.NewRow();
+            row2["?Y"] = new RDFPlainLiteral("hello", "en-US").ToString();
+            row2["?B"] = new RDFPlainLiteral("bonjour", "fr-FR").ToString();
+            table2.Rows.Add(row2);
+            table2.AcceptChanges();
+
+            //Assert
+            //A megadott oszlop és a pattern nem diszjunkt halmaz, de a Tárgy a sorban és a pattern-ben megegyezik, ezért itt megtartjuk.
+            Assert.IsTrue(n.ApplyFilter(row2, false));
+            //A második paraméter negálja az előzőt, tehát ennek false-nak kell lennie
+            Assert.IsFalse(n.ApplyFilter(row2, true));
+        }
+
         #endregion
 
         #region RDFNotExistsFilter
-       
+
         [TestMethod]
         public void RDFNotExistsFilterOK()
-        {
-            RDFVariable x = new RDFVariable("x");
-            RDFVariable y = new RDFVariable("y");
-            RDFResource knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
+        {       
+            //Arrange
             var pattern = new RDFPattern(x, knows, y);
-            RDFNotExistsFilter filter = new RDFNotExistsFilter(pattern);
-            Assert.AreEqual<RDFPattern>(pattern, filter.Pattern);
+            //Act
+            RDFNotExistsFilter f = new RDFNotExistsFilter(pattern);
+            //Assert
+            Assert.AreEqual<RDFPattern>(pattern, f.Pattern);
             Assert.IsTrue(filter.IsEvaluable);
         }
 
         [TestMethod]
         public void RDFNotExistsFilterToString()
         {
-            //Arrange
-            RDFVariable x = new RDFVariable("x");
-            RDFVariable y = new RDFVariable("y");
-            RDFResource knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
+            //Arrange         
             var pattern = new RDFPattern(x, knows, y);
 
             //Act
@@ -150,34 +269,6 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
         public void RDFNotExistsFilterApplyFilterContains()
         {
             //Arrange
-            RDFVariable x = new RDFVariable("x");
-            RDFVariable y = new RDFVariable("y");
-            RDFResource knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
-            var pattern = new RDFPattern(x, knows, y);
-            RDFExistsFilter n = new RDFExistsFilter(pattern);
-
-            DataTable table = new DataTable();
-            table.Columns.Add("?A", typeof(string));
-            table.Columns.Add("?B", typeof(string));
-            DataRow row = table.NewRow();
-            row["?A"] = null;
-            row["?B"] = new RDFPlainLiteral("hello", "en-US").ToString();
-            table.Rows.Add(row);
-            table.AcceptChanges();
-
-            n.PatternResults = table;
-
-            //Assert
-            Assert.IsTrue(n.ApplyFilter(row, false));
-        }
-
-        [TestMethod]
-        public void RDFNotExistsFilterApplyFilterNotContains()
-        {
-            //Arrange
-            RDFVariable x = new RDFVariable("x");
-            RDFVariable y = new RDFVariable("y");
-            RDFResource knows = new RDFResource(RDFVocabulary.DC.BASE_URI + "knows");
             var pattern = new RDFPattern(x, knows, y);
             RDFNotExistsFilter n = new RDFNotExistsFilter(pattern);
 
@@ -192,18 +283,10 @@ namespace RDFSharp.Test.Query.Mirella.Algebra.Filters
 
             n.PatternResults = table;
 
-            DataTable table2 = new DataTable();
-            table.Columns.Add("?C", typeof(string));
-            table.Columns.Add("?D", typeof(string));
-            DataRow row2 = table.NewRow();
-            row2["?C"] = null;
-            row2["?D"] = new RDFPlainLiteral("bonjour", "fr-FR").ToString();
-            table.Rows.Add(row2);
-            table.AcceptChanges();
-
             //Assert
-            Assert.IsTrue(n.ApplyFilter(row2, true));
-            Assert.IsFalse(n.ApplyFilter(row2, false));
+
+            Assert.IsTrue(n.ApplyFilter(row, true));
+            Assert.IsFalse(n.ApplyFilter(row, false));
         }
         #endregion
     }
