@@ -134,7 +134,6 @@ namespace RDFSharp.Query
                 {
                     using (XmlTextReader xmlReader = new XmlTextReader(streamReader))
                     {
-                        xmlReader.DtdProcessing = DtdProcessing.Parse;
                         xmlReader.Normalization = false;
 
                         #region load
