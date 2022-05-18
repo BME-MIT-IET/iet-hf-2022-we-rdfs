@@ -13,7 +13,16 @@ namespace RDFSharp.ManualTest
     {
         static void Main(string[] args)
         {
-            LoadModels.ReadFromXml(2);
+
+            LoadandWriteModels.CreateFiles();
+
+            LoadandWriteModels.TestXmlRead(3);
+            LoadandWriteModels.TestN3Read(3);
+            LoadandWriteModels.TestTrixRead(3);
+
+
+            //LoadandWriteModels.TestTurtle(3);
+            Console.WriteLine("done");
             Console.ReadKey();
         }
     }
