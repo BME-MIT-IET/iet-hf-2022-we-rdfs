@@ -25,10 +25,12 @@ namespace RDFSharp.NonFunctionalTests
         public static void Run(int iterations=10)
         {
             Graph = RDFGraph.FromFile(RDFModelEnums.RDFFormats.RdfXml, "szepmuveszeti.rdf");
+            Console.WriteLine("Started testing queries.");
             QueryAllActors(iterations);
             QueryActorsByName(iterations);
             QueryCreatorsandCreations(iterations);
             QueryRembrandtEtchings(iterations);
+            Console.WriteLine("Finished testing queries.");
         }
 
         /// <summary>
@@ -224,7 +226,6 @@ namespace RDFSharp.NonFunctionalTests
             {
                 start = DateTime.Now;
                 var queryResult = query.ApplyToGraph(Graph);
-                queryResult.ToSparqlXmlResult("results.srq");
                 end = DateTime.Now;
 
                 ts = (end - start);

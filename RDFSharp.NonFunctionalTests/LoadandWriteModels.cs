@@ -16,6 +16,23 @@ namespace RDFSharp.NonFunctionalTests
 
         private static RDFGraph Graph;
 
+        public static void Run(int iterations = 10)
+        {
+            CreateFiles();
+
+            Console.WriteLine("Started testing loading graphs.");
+            TestXmlRead(iterations);
+            TestN3Read(iterations);
+            TestTrixRead(iterations);
+            Console.WriteLine("Finished testing loading graphs.");
+
+            Console.WriteLine("Started testing writing graphs.");
+            TestXmlWrite(iterations);
+            TestN3Write(iterations);
+            TestTrixWrite(iterations);
+            Console.WriteLine("Finished testing writing graphs.");
+        }
+
         /// <summary>
         /// Creates files in different formats
         /// </summary>
