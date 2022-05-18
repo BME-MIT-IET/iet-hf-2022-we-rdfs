@@ -18,15 +18,23 @@ namespace RDFSharp.NonFunctionalTests
 
         private static RDFGraph Graph;
 
-        public static void Run()
+        /// <summary>
+        /// Executes 4 queries on the database a given number of times
+        /// </summary>
+        /// <param name="iterations">Number of times to execute queries</param>
+        public static void Run(int iterations=10)
         {
             Graph = RDFGraph.FromFile(RDFModelEnums.RDFFormats.RdfXml, "szepmuveszeti.rdf");
-            QueryAllActors(0);
-            QueryActorsByName(0);
-            QueryCreatorsandCreations(0);
-            QueryRembrandtEtchings();
+            QueryAllActors(iterations);
+            QueryActorsByName(iterations);
+            QueryCreatorsandCreations(iterations);
+            QueryRembrandtEtchings(iterations);
         }
 
+        /// <summary>
+        /// Returns all of creators (type: Actor) in the database
+        /// </summary>
+        /// <param name="iteration">Number of times to execute the query</param>
         public static void QueryAllActors(int iteration=10)
         {
             DateTime start;
@@ -66,6 +74,10 @@ namespace RDFSharp.NonFunctionalTests
                 total_time.TotalMilliseconds, total_time.TotalMilliseconds / iteration);
         }
 
+        /// <summary>
+        /// Returns creators (type: Actor) called Giovanni in the database
+        /// </summary>
+        /// <param name="iteration">Number of times to execute the query</param>
         public static void QueryActorsByName(int iteration = 10)
         {
             DateTime start;
@@ -108,6 +120,10 @@ namespace RDFSharp.NonFunctionalTests
                 total_time.TotalMilliseconds, total_time.TotalMilliseconds / iteration);
         }
 
+        /// <summary>
+        /// Links and returns all of creators (type: Actor) and their creations in the database
+        /// </summary>
+        /// <param name="iteration">Number of times to execute the query</param>
         public static void QueryCreatorsandCreations(int iteration = 10)
         {
             DateTime start;
@@ -157,6 +173,10 @@ namespace RDFSharp.NonFunctionalTests
                 total_time.TotalMilliseconds, total_time.TotalMilliseconds / iteration);
         }
 
+        /// <summary>
+        /// Links and returns etchings made by Rembrandt
+        /// </summary>
+        /// <param name="iteration">Number of times to execute the query</param>
         public static void QueryRembrandtEtchings(int iteration = 10)
         {
             DateTime start;
@@ -198,7 +218,7 @@ namespace RDFSharp.NonFunctionalTests
             // Writing to results file
             using StreamWriter results = File.AppendText(ResultsFileName);
 
-            results.Write("Querying actors and their creations\n");
+            results.Write("Querying etchings made by Rembrandt\n");
 
             for (int i = 0; i < iteration; i++)
             {
