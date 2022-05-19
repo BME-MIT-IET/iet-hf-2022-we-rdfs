@@ -36,13 +36,13 @@ A programkód alaposabb átnézése után úgy határoztunk, hogy a Semantics ma
 
 ### Egységtesztek javítása
 
-<p>A tesztek felülvizsgálata további 8 egységtesztet eredményezett és a meglévők javítása is megtörtént. </p>
+<p>A tesztek felülvizsgálata további 5 egységtesztet eredményezett és a meglévők javítása is megtörtént. </p>
 <ol>
-    <li>RDFBoleanFilterTest.cs (szum új 4 unit teszt)
+    <li>RDFBoleanFilterTest.cs (szum új 3 unit teszt)
     <ol>
     <li>RDFBooleanAndFilter, RDFBooleanNotFilter és RDFBooleanOrFilter osztályokhoz</li>
     </ol></li>
-    <li>RDFExsistFilterTest.cs		(4 új unit teszt)</li>
+    <li>RDFExsistFilterTest.cs		(2 új unit teszt)</li>
 </ol>
 
 <p>A végleges lefedettsége a Mirella mappának még 1,5%-kal nőtt, az Algebra mappa lefedettsége még 2%-ot emelkedett, ezzel a tesztekre választott 
