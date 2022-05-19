@@ -185,6 +185,11 @@ namespace RDFSharp.Query
             }
         }
 
+        public object SelectResultCount()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Asynchronously writes the "SPARQL Query Results XML Format" stream corresponding to the SELECT query result
         /// </summary>
@@ -231,8 +236,6 @@ namespace RDFSharp.Query
                 {
                     using (XmlTextReader xmlReader = new XmlTextReader(streamReader))
                     {
-                        xmlReader.XmlResolver = null;
-                        xmlReader.DtdProcessing = DtdProcessing.Parse;
                         xmlReader.Normalization = false;
 
                         #region document
