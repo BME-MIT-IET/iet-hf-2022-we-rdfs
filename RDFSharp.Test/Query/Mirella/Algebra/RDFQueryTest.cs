@@ -43,12 +43,12 @@ namespace RDFSharp.Test.Query
             Assert.IsFalse(query.IsSubQuery);
             Assert.IsTrue(query.ToString().Equals(string.Empty));
             Assert.IsTrue(query.QueryMemberID.Equals(RDFModelUtilities.CreateHash(query.QueryMemberStringID)));
-            Assert.IsTrue(query.GetEvaluableQueryMembers().Count() == 0);
-            Assert.IsTrue(query.GetPatternGroups().Count() == 0);
-            Assert.IsTrue(query.GetSubQueries().Count() == 0);
-            Assert.IsTrue(query.GetValues().Count() == 0);
-            Assert.IsTrue(query.GetModifiers().Count() == 0);
-            Assert.IsTrue(query.GetPrefixes().Count() == 0);
+            Assert.IsTrue(!query.GetEvaluableQueryMembers().Any());
+            Assert.IsTrue(!query.GetPatternGroups().Any());
+            Assert.IsTrue(!query.GetSubQueries().Any());
+            Assert.IsTrue(!query.GetValues().Any());
+            Assert.IsTrue(!query.GetModifiers().Any());
+            Assert.IsTrue(!query.GetPrefixes().Any());
         }
 
         [TestMethod]
@@ -72,10 +72,10 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(query.ToString().Equals(string.Empty));
             Assert.IsTrue(query.GetEvaluableQueryMembers().Count() == 1);
             Assert.IsTrue(query.GetPatternGroups().Count() == 1);
-            Assert.IsTrue(query.GetSubQueries().Count() == 0);
-            Assert.IsTrue(query.GetValues().Count() == 0);
-            Assert.IsTrue(query.GetModifiers().Count() == 0);
-            Assert.IsTrue(query.GetPrefixes().Count() == 0);
+            Assert.IsTrue(!query.GetSubQueries().Any());
+            Assert.IsTrue(!query.GetValues().Any());
+            Assert.IsTrue(!query.GetModifiers().Any());
+            Assert.IsTrue(!query.GetPrefixes().Any());
         }
 
         [TestMethod]
@@ -103,12 +103,12 @@ namespace RDFSharp.Test.Query
             Assert.IsFalse(query.IsSubQuery);
             Assert.IsTrue(query.ToString().Equals(string.Empty));
             Assert.IsTrue(query.QueryMemberID.Equals(RDFModelUtilities.CreateHash(query.QueryMemberStringID)));
-            Assert.IsTrue(query.GetEvaluableQueryMembers().Count() == 0);
-            Assert.IsTrue(query.GetPatternGroups().Count() == 0);
-            Assert.IsTrue(query.GetSubQueries().Count() == 0);
-            Assert.IsTrue(query.GetValues().Count() == 0);
+            Assert.IsTrue(!query.GetEvaluableQueryMembers().Any());
+            Assert.IsTrue(!query.GetPatternGroups().Any());
+            Assert.IsTrue(!query.GetSubQueries().Any());
+            Assert.IsTrue(!query.GetValues().Any());
             Assert.IsTrue(query.GetModifiers().Count() == 3);
-            Assert.IsTrue(query.GetPrefixes().Count() == 0);
+            Assert.IsTrue(!query.GetPrefixes().Any());
         }
 
         [TestMethod]
@@ -130,11 +130,11 @@ namespace RDFSharp.Test.Query
             Assert.IsFalse(query.IsSubQuery);
             Assert.IsTrue(query.ToString().Equals(string.Empty));
             Assert.IsTrue(query.QueryMemberID.Equals(RDFModelUtilities.CreateHash(query.QueryMemberStringID)));
-            Assert.IsTrue(query.GetEvaluableQueryMembers().Count() == 0);
-            Assert.IsTrue(query.GetPatternGroups().Count() == 0);
-            Assert.IsTrue(query.GetSubQueries().Count() == 0);
-            Assert.IsTrue(query.GetValues().Count() == 0);
-            Assert.IsTrue(query.GetModifiers().Count() == 0);
+            Assert.IsTrue(!query.GetEvaluableQueryMembers().Any());
+            Assert.IsTrue(!query.GetPatternGroups().Any());
+            Assert.IsTrue(!query.GetSubQueries().Any());
+            Assert.IsTrue(!query.GetValues().Any());
+            Assert.IsTrue(!query.GetModifiers().Any());
             Assert.IsTrue(query.GetPrefixes().Count() == 1);
         }
 
@@ -160,11 +160,11 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(query.ToString().Equals(string.Empty));
             Assert.IsTrue(query.QueryMemberID.Equals(RDFModelUtilities.CreateHash(query.QueryMemberStringID)));
             Assert.IsTrue(query.GetEvaluableQueryMembers().Count() == 1);
-            Assert.IsTrue(query.GetPatternGroups().Count() == 0);
+            Assert.IsTrue(!query.GetPatternGroups().Any());
             Assert.IsTrue(query.GetSubQueries().Count() == 1);
-            Assert.IsTrue(query.GetValues().Count() == 0);
-            Assert.IsTrue(query.GetModifiers().Count() == 0);
-            Assert.IsTrue(query.GetPrefixes().Count() == 0);
+            Assert.IsTrue(!query.GetValues().Any());
+            Assert.IsTrue(!query.GetModifiers().Any());
+            Assert.IsTrue(!query.GetPrefixes().Any());
         }
 
         [TestMethod]
@@ -191,10 +191,10 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(query.GetEvaluableQueryMembers().Count() == 1); //The only pattern group
             Assert.IsTrue(query.GetPatternGroups().Count() == 1);
             Assert.IsTrue(query.GetPatternGroups().Single().GetValues().Count() == 1);
-            Assert.IsTrue(query.GetSubQueries().Count() == 0);
+            Assert.IsTrue(!query.GetSubQueries().Any());
             Assert.IsTrue(query.GetValues().Count() == 1); //Coming from the only pattern group
-            Assert.IsTrue(query.GetModifiers().Count() == 0);
-            Assert.IsTrue(query.GetPrefixes().Count() == 0);
+            Assert.IsTrue(!query.GetModifiers().Any());
+            Assert.IsTrue(!query.GetPrefixes().Any());
         }
 
         [TestMethod]
@@ -219,12 +219,12 @@ namespace RDFSharp.Test.Query
             Assert.IsTrue(query.ToString().Equals(string.Empty));
             Assert.IsTrue(query.QueryMemberID.Equals(RDFModelUtilities.CreateHash(query.QueryMemberStringID)));
             Assert.IsTrue(query.GetEvaluableQueryMembers().Count() == 1); //The only sub query
-            Assert.IsTrue(query.GetPatternGroups().Count() == 0);
+            Assert.IsTrue(!query.GetPatternGroups().Any());
             Assert.IsTrue(query.GetSubQueries().Count() == 1);
             Assert.IsTrue(query.GetSubQueries().Single().GetValues().Count() == 1);
             Assert.IsTrue(query.GetValues().Count() == 1); //Coming from the only sub query
-            Assert.IsTrue(query.GetModifiers().Count() == 0);
-            Assert.IsTrue(query.GetPrefixes().Count() == 0);
+            Assert.IsTrue(!query.GetModifiers().Any());
+            Assert.IsTrue(!query.GetPrefixes().Any());
         }
         #endregion
     }
