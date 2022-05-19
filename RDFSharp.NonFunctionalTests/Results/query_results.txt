@@ -1,0 +1,52 @@
+Querying all actors
+	1. iteration: query time is 94,4622 ms
+	2. iteration: query time is 18,2355 ms
+	3. iteration: query time is 26,8286 ms
+	4. iteration: query time is 20,341 ms
+	5. iteration: query time is 18,5283 ms
+	6. iteration: query time is 19,0892 ms
+	7. iteration: query time is 19,8182 ms
+	8. iteration: query time is 19,3845 ms
+	9. iteration: query time is 24,0772 ms
+	10. iteration: query time is 17,9027 ms
+Total query time:278,6674 ms, Average query time:27,86674 ms
+
+Querying actors named Giovanni
+	1. iteration: query time is 223,4804 ms
+	2. iteration: query time is 232,1395 ms
+	3. iteration: query time is 203,54 ms
+	4. iteration: query time is 261,5687 ms
+	5. iteration: query time is 230,0468 ms
+	6. iteration: query time is 231,3175 ms
+	7. iteration: query time is 197,3289 ms
+	8. iteration: query time is 186,6048 ms
+	9. iteration: query time is 196,9569 ms
+	10. iteration: query time is 198,1041 ms
+Total query time:2161,0876 ms, Average query time:216,10876 ms
+
+Querying actors and their creations
+	1. iteration: query time is 85,3046 ms
+	2. iteration: query time is 97,2865 ms
+	3. iteration: query time is 80,8157 ms
+	4. iteration: query time is 104,3817 ms
+	5. iteration: query time is 96,7237 ms
+	6. iteration: query time is 89,6211 ms
+	7. iteration: query time is 88,257 ms
+	8. iteration: query time is 90,114 ms
+	9. iteration: query time is 86,2802 ms
+	10. iteration: query time is 88,8303 ms
+Total query time:907,6148 ms, Average query time:90,76147999999999 ms
+
+Querying etchings made by Rembrandt
+	1. iteration: query time is 941,7159 ms
+	2. iteration: query time is 1075,113 ms
+	3. iteration: query time is 1042,6391 ms
+	4. iteration: query time is 973,0845 ms
+	5. iteration: query time is 1570,1383 ms
+	6. iteration: query time is 995,1029 ms
+	7. iteration: query time is 1015,2122 ms
+	8. iteration: query time is 1002,4286 ms
+	9. iteration: query time is 1074,1115 ms
+	10. iteration: query time is 1237,6203 ms
+Total query time:10927,1663 ms, Average query time:1092,7166300000001 ms
+
