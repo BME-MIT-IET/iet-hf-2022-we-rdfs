@@ -15,7 +15,7 @@
 ## Checklist:
 <p>Az interneten talált checklist alapján haladtunk tovább:</p>
 
-![Code review checklist](images\manual_code_review/code_review_steps.png)
+![Code review checklist](images\manual_code_review\code_review_steps.png)
 
 <p>Lépések:</p>
 
@@ -59,10 +59,10 @@ Próbáltunk keresni olyan extension-t ami megkeresi a kód duplikációkat visz
     <li>Semantics projekt struktúrájának vizsgálata: generált osztálydiagrammból azt szűrtük le, hogy nincsenek körkörös függőségek.</li>
 </ul>
 
-![Class diagram #1](images\manual_code_review/class_diagram_2.png)
+![Class diagram #1](images\manual_code_review\class_diagram_2.png)
 
 <ul>
     <li>Vannak olyan osztályok amik csak bizonyos függvényeken belül vannak használva viszont nem mint attribútum így ezek nincsenek összekötve egyik másik osztállyal sem.</li>
 </ul>
 
-![Class diagram #2](images\manual_code_review/class_diagram.png)
+![Class diagram #2](images\manual_code_review\class_diagram.png)
