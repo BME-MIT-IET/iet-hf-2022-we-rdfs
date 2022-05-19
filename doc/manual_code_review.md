@@ -55,14 +55,14 @@ Próbáltunk keresni olyan extension-t ami megkeresi a kód duplikációkat visz
 
 ## Osztálydiagram:
 <ul>
-    <li>Végezetül generáltunk a Visuál Studio segítségével egy osztálydiagramot</li>
+    <li>Generáltunk a Visual Studio segítségével egy osztálydiagramot.</li>
     <li>Semantics projekt struktúrájának vizsgálata: generált osztálydiagrammból azt szűrtük le, hogy nincsenek körkörös függőségek.</li>
 </ul>
 
-![Code review checklist](images\manual_code_review/class_diagram_2.png)
+![Class diagram #1](images\manual_code_review/class_diagram_2.png)
 
 <ul>
     <li>Vannak olyan osztályok amik csak bizonyos függvényeken belül vannak használva viszont nem mint attribútum így ezek nincsenek összekötve egyik másik osztállyal sem.</li>
 </ul>
 
-![Code review checklist](images\manual_code_review/class_diagram.png)
+![Class diagram #2](images\manual_code_review/class_diagram.png)
